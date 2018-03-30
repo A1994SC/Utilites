@@ -32,11 +32,7 @@ public class ScryfallUtilities {
     }
 
     public static String getSetName(String setid) {
-        try {
-            return getJsonFromURL(String.format(set, setid)).get("name").getAsString();
-        } catch (Exception e) {
-            return null;
-        }
+        return getFromURL(set, setid).get(("name")).getAsString();
     }
 
     /**
@@ -48,6 +44,7 @@ public class ScryfallUtilities {
      */
     public static JsonObject getFromURL(String type, String args) {
         try {
+            Thread.sleep(100);
             return getJsonFromURL(String.format((url + type), URLEncoder.encode(args, "UTF-8")));
         } catch (Exception e) {
             return null;

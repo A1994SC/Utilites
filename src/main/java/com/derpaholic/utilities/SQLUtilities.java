@@ -12,11 +12,27 @@ public class SQLUtilities {
     private static final String insert = "INSERT INTO %s (%s) VALUES (%s);";
     private static final String select = "SELECT * from %s where %s;";
     private static final String column = "%s='%s'";
+    private static final String className = "org.sqlite.JDBC";
 
     public static Connection getConnection(String url) {
         try {
-            Class.forName("org.sqlite.JDBC");
+            Class.forName(className);
             return DriverManager.getConnection(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Connection initTable(String url, String table) {
+        try {
+            Connection c = getConnection(url);
+            Statement stmt = getStatement(c);
+
+            stmt.execute(table);
+            stmt.close();
+
+            return c;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

@@ -72,7 +72,7 @@ public class SQLUtilities {
     }
 
     private static String formatArray(String[] ary) {
-        return Stream.of(ary).collect(Collectors.joining(",", "", ""));
+        return Stream.of(ary).map(s -> "'" + s + "'").collect(Collectors.joining(",", "", ""));
     }
 
 }

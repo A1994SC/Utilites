@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 public class SQLUtilities {
 
     private static final String insert = "INSERT INTO %s (%s) VALUES (%s);";
+    private static final String insertIgnore = "INSERT IGNORE INTO %s (%s) VALUES (%s);";
     private static final String select = "SELECT * from %s where %s;";
     private static final String column = "%s='%s'";
     private static final String className = "org.sqlite.JDBC";
@@ -57,6 +58,12 @@ public class SQLUtilities {
     }
 
     public static String getInsert(String table, String[] tbl_var, String[] values) {
+        return getInsert(table, tbl_var, values, false);
+    }
+
+    public static String getInsert(String table, String[] tbl_var, String[] values, boolean ignore) {
+        if (ignore)
+            return String.format(insertIgnore, table, formatArray(tbl_var), formatArray(values));
         return String.format(insert, table, formatArray(tbl_var), formatArray(values));
     }
 

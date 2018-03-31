@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public class SQLUtilities {
 
     private static final String insert = "INSERT INTO %s (%s) VALUES (%s);";
-    private static final String insertIgnore = "INSERT IGNORE INTO %s (%s) VALUES (%s);";
+    private static final String insertIgnore = "INSERT or IGNORE INTO %s (%s) VALUES (%s);";
     private static final String select = "SELECT * from %s where %s;";
     private static final String column = "%s='%s'";
     private static final String className = "org.sqlite.JDBC";
